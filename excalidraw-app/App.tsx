@@ -41,7 +41,7 @@ import {
   isTestEnv,
   preventUnload,
   resolvablePromise,
-  isRunningInIframe,
+  // isRunningInIframe,
 } from "../packages/excalidraw/utils";
 import {
   FIREBASE_STORAGE_PREFIXES,
@@ -128,6 +128,12 @@ import DebugCanvas, {
 import { AIComponents } from "./components/AI";
 import { ExcalidrawPlusIframeExport } from "./ExcalidrawPlusIframeExport";
 import { isElementLink } from "../packages/excalidraw/element/elementLink";
+
+import UserSignin from "./components/Bamao/Signin";
+import FileList from "./components/Bamao/FileList";
+import { getUserInfo } from "./components/Bamao/Apis";
+import Spinner from "./components/Bamao/Spinner";
+import "./components/Bamao/Var.scss";
 
 polyfill();
 
@@ -326,7 +332,8 @@ const initializeScene = async (opts: {
 
 const ExcalidrawWrapper = () => {
   const [errorMessage, setErrorMessage] = useState("");
-  const isCollabDisabled = isRunningInIframe();
+  // const isCollabDisabled = isRunningInIframe();
+  const isCollabDisabled = true;
 
   const [appTheme, setAppTheme] = useAtom(appThemeAtom);
   const { editorTheme } = useHandleAppTheme();
@@ -835,10 +842,12 @@ const ExcalidrawWrapper = () => {
         theme={editorTheme}
         renderTopRightUI={(isMobile) => {
           if (isMobile || !collabAPI || isCollabDisabled) {
-            return null;
+            // return null;
+            return <FileList excalidrawAPI={excalidrawAPI} />;
           }
           return (
             <div className="top-right-ui">
+              <FileList excalidrawAPI={excalidrawAPI} />
               {collabError.message && <CollabError collabError={collabError} />}
               <LiveCollaborationTrigger
                 isCollaborating={isCollaborating}
@@ -1133,6 +1142,20 @@ const ExcalidrawWrapper = () => {
 };
 
 const ExcalidrawApp = () => {
+  const [isLogin, setIsLogin] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    getUserInfo()
+      .then((user) => {
+        setIsLogin(Boolean(user));
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   const isCloudExportWindow =
     window.location.pathname === "/excalidraw-plus-export";
   if (isCloudExportWindow) {
@@ -1142,7 +1165,15 @@ const ExcalidrawApp = () => {
   return (
     <TopErrorBoundary>
       <Provider unstable_createStore={() => appJotaiStore}>
-        <ExcalidrawWrapper />
+        {loading ? (
+          <div className="loading-wrapper">
+            <Spinner />
+          </div>
+        ) : isLogin ? (
+          <ExcalidrawWrapper />
+        ) : (
+          <UserSignin onLogin={() => setIsLogin(true)} />
+        )}
       </Provider>
     </TopErrorBoundary>
   );

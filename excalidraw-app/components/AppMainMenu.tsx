@@ -1,14 +1,14 @@
 import React from "react";
-import {
-  loginIcon,
-  ExcalLogo,
-  eyeIcon,
-} from "../../packages/excalidraw/components/icons";
+// import {
+//   loginIcon,
+//   ExcalLogo,
+//   eyeIcon,
+// } from "../../packages/excalidraw/components/icons";
 import type { Theme } from "../../packages/excalidraw/element/types";
 import { MainMenu } from "../../packages/excalidraw/index";
-import { isExcalidrawPlusSignedUser } from "../app_constants";
+// import { isExcalidrawPlusSignedUser } from "../app_constants";
 import { LanguageList } from "../app-language/LanguageList";
-import { saveDebugState } from "./DebugCanvas";
+// import { saveDebugState } from "./DebugCanvas";
 
 export const AppMainMenu: React.FC<{
   onCollabDialogOpen: () => any;
@@ -34,8 +34,8 @@ export const AppMainMenu: React.FC<{
       <MainMenu.DefaultItems.SearchMenu />
       <MainMenu.DefaultItems.Help />
       <MainMenu.DefaultItems.ClearCanvas />
-      <MainMenu.Separator />
-      <MainMenu.ItemLink
+      {/* <MainMenu.Separator /> */}
+      {/* <MainMenu.ItemLink
         icon={ExcalLogo}
         href={`${
           import.meta.env.VITE_APP_PLUS_LP
@@ -43,9 +43,9 @@ export const AppMainMenu: React.FC<{
         className=""
       >
         Excalidraw+
-      </MainMenu.ItemLink>
-      <MainMenu.DefaultItems.Socials />
-      <MainMenu.ItemLink
+      </MainMenu.ItemLink> */}
+      {/* <MainMenu.DefaultItems.Socials /> */}
+      {/* <MainMenu.ItemLink
         icon={loginIcon}
         href={`${import.meta.env.VITE_APP_PLUS_APP}${
           isExcalidrawPlusSignedUser ? "" : "/sign-up"
@@ -53,8 +53,8 @@ export const AppMainMenu: React.FC<{
         className="highlighted"
       >
         {isExcalidrawPlusSignedUser ? "Sign in" : "Sign up"}
-      </MainMenu.ItemLink>
-      {import.meta.env.DEV && (
+      </MainMenu.ItemLink> */}
+      {/* {import.meta.env.DEV && (
         <MainMenu.Item
           icon={eyeIcon}
           onClick={() => {
@@ -70,7 +70,7 @@ export const AppMainMenu: React.FC<{
         >
           Visual Debug
         </MainMenu.Item>
-      )}
+      )} */}
       <MainMenu.Separator />
       <MainMenu.DefaultItems.ToggleTheme
         allowSystemTheme

@@ -50,7 +50,7 @@ const ExcalidrawBase = (props: ExcalidrawProps) => {
     children,
     validateEmbeddable,
     renderEmbeddable,
-    aiEnabled,
+    aiEnabled = false,
     showDeprecatedFonts,
   } = props;
 

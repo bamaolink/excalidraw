@@ -238,7 +238,7 @@ export const TTDDialogBase = withInternalFallback(
         autofocus={false}
       >
         <TTDDialogTabs dialog="ttd" tab={tab}>
-          {"__fallback" in rest && rest.__fallback ? (
+          {/* {"__fallback" in rest && rest.__fallback ? (
             <p className="dialog-mermaid-title">{t("mermaid.title")}</p>
           ) : (
             <TTDDialogTabTriggers>
@@ -264,7 +264,7 @@ export const TTDDialogBase = withInternalFallback(
               </TTDDialogTabTrigger>
               <TTDDialogTabTrigger tab="mermaid">Mermaid</TTDDialogTabTrigger>
             </TTDDialogTabTriggers>
-          )}
+          )} */}
 
           <TTDDialogTab className="ttd-dialog-content" tab="mermaid">
             <MermaidToExcalidraw
